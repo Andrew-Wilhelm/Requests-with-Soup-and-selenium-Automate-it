@@ -12,13 +12,22 @@ from selenium.webdriver.common.keys import Keys     # literally keys on the keyb
 from selenium.webdriver.common.by import By
 
 if __name__ == '__main__':
-
     driver = webdriver.Chrome()
     driver.get("https://fgcuathletics.com/sports/womens-soccer/stats/2022")
     assert "page not found" not in driver.page_source
 
-    elem = driver.find_element(By.CLASS_NAME, "sidearm-table")
-    print(elem.text)
+    table_rows = []
 
+    table_data = driver.find_elements(By.XPATH, "//table[1]//thread//tr//th")
+    table_rows.append([h.text for h in table_data if h.text])
 
+    table_data = driver.find_elements(By.XPATH, "//table[1]/tbody/tr")
+    for row in table_data:
+        if row.text:
+            cur_row = row.text.split(" ")
+            if len(cur_row) != 1:
+                table_rows.append(cur_row)
+
+    for i, row in enumerate(table_rows):
+        print(f"Row {i} is:{row}")
     driver.close()
