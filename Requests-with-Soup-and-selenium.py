@@ -8,7 +8,17 @@ Will display (print) which season they did the best
 """
 
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys     # literally keys on the keyboard for input
+from selenium.webdriver.common.by import By
 
 if __name__ == '__main__':
-    # opens google chrome
+
     driver = webdriver.Chrome()
+    driver.get("https://fgcuathletics.com/sports/womens-soccer/stats/2022")
+    assert "page not found" not in driver.page_source
+
+    elem = driver.find_element(By.CLASS_NAME, "sidearm-table")
+    print(elem.text)
+
+
+    driver.close()
