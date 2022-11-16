@@ -33,6 +33,7 @@ def makerows(row):
 
 """
 Basic overview of selenium over Beautiful Soup for webscrapping.
+
 Loads multiple select options of a table then grabs the data.
 Not optimized (good candidate for moving to async or multiprocess with bots)
 """
